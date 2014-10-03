@@ -33,7 +33,6 @@ show call active voice
 
 ! Show SIP status and Troubleshooting
 ! CUBE specific commands:
-! show sip call brief
 ! show sip call callid [enter ID from above output]
 ! Show SIP-ua  calls
 ! Show SIP-ua statistics
@@ -41,7 +40,8 @@ show call active voice
 ! Show SIP-ua retry
 ! Show SIP-ua timers
 ! Show voip rtp connection
-show voice call status
+! show voice call status
+show sip call brief
 
 !  Troubleshoot MoH: when you issue this and keep repeating it you can see if 
 !  1) there are any active multicast MoH sessions that CUCM is tuning calls into 
