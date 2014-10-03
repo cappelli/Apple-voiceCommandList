@@ -1,0 +1,62 @@
+sh voice dsp detail
+
+sh policy-map int Gi0/0 output
+
+! Copy from router to FTP server
+copy flash:FILE ftp://17.0.56.104
+
+debug voip ccapi inout
+
+! debug ISDN,  POTS & DSP to PSTN 
+! sh voice dsp group all
+! use the following even on POTS lines to watch calls come and go.
+! debug VOIP dialpeer
+! debug voice dial-peer inout
+! debug isdn q921
+debug isdn q931
+
+! Show call active and related
+! sh dial-peer voice summary
+! sh voice port summary
+! sh voice call status
+! sh call active voice brief 
+sh isdn active
+
+! show SIP registration (voice register)
+show voice register global
+
+! Show dial-peer specifics
+! sh dial-peer voice summary
+! sh dial-peer voice <2>
+! show voice call summary
+show call active voice
+
+! Show SIP status and Troubleshooting
+! CUBE specific commands:
+! show sip call brief
+! show sip call callid [enter ID from above output]
+! Show SIP-ua  calls
+! Show SIP-ua statistics
+! Show SIP-ua status
+! Show SIP-ua retry
+! Show SIP-ua timers
+! Show voip rtp connection
+show voice call status
+
+!  Troubleshoot MoH: when you issue this and keep repeating it you can see if 
+!  1) there are any active multicast MoH sessions that CUCM is tuning calls into 
+!  2) if the packets are incrementing 
+!  if the packets are incrementing then we are allowing calls to listen to the multicast Moh source but the source on FXO 0/1/0) isn’t playing
+show voip RTP connections
+show ccm-manager music-on-hold
+
+! Read phone config by downloading to unix host:
+! tftp IPADDR get SEP64168DBA3A8B.cnf.xml
+! or 
+tftp IPADDR get SEP64168DBA3A8B.cnf.xml.sgn
+
+sh call-manager-fallback all
+
+! test aaa group radius legacy
+test aaa group tacacs+ legacy
+
